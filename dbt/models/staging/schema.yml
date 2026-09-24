@@ -1,0 +1,91 @@
+version: 2
+
+models:
+  - name: stg_weather
+    description: >
+      Cleaned and typed daily weather observations extracted from the raw
+      Open-Meteo payload. One row represents one configured city for one
+      logical weather date.
+
+    columns:
+      - name: city
+        description: Configured city name.
+        data_tests:
+          - not_null
+
+      - name: weather_date
+        description: Date of the weather observation returned by Open-Meteo.
+        data_tests:
+          - not_null
+
+      - name: latitude
+        description: Latitude returned by Open-Meteo.
+        data_tests:
+          - not_null
+
+      - name: longitude
+        description: Longitude returned by Open-Meteo.
+        data_tests:
+          - not_null
+
+      - name: timezone
+        description: Timezone returned by Open-Meteo.
+        data_tests:
+          - not_null
+
+      - name: weather_code
+        description: Open-Meteo weather condition code.
+
+      - name: temperature_2m_max
+        description: Maximum daily air temperature at 2 metres in degrees Celsius.
+        data_tests:
+          - not_null
+
+      - name: temperature_2m_min
+        description: Minimum daily air temperature at 2 metres in degrees Celsius.
+        data_tests:
+          - not_null
+
+      - name: apparent_temperature_max
+        description: Maximum daily apparent temperature in degrees Celsius.
+        data_tests:
+          - not_null
+
+      - name: precipitation_sum
+        description: Total daily precipitation in millimetres.
+        data_tests:
+          - not_null
+
+      - name: rain_sum
+        description: Total daily rain in millimetres.
+        data_tests:
+          - not_null
+
+      - name: precipitation_hours
+        description: Number of hours during the day with precipitation.
+
+      - name: sunshine_duration_hours
+        description: Daily sunshine duration converted from seconds to hours.
+        data_tests:
+          - not_null
+
+      - name: daylight_duration_hours
+        description: Daily daylight duration converted from seconds to hours.
+        data_tests:
+          - not_null
+
+      - name: wind_speed_10m_max
+        description: Maximum daily wind speed at 10 metres.
+
+      - name: wind_gusts_10m_max
+        description: Maximum daily wind gust speed at 10 metres.
+
+      - name: logical_date
+        description: Logical date passed to the ingestion run.
+        data_tests:
+          - not_null
+
+      - name: loaded_at
+        description: Timestamp when the raw row was inserted or refreshed.
+        data_tests:
+          - not_null
