@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: city_weather_profile
+    description: >
+      Latest rolling weather profile for each configured city using up to
+      30 days of available observations.
+
+    columns:
+      - name: city
+        description: Configured city name.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: window_start_date
+        description: Earliest weather date included in the current rolling window.
+        data_tests:
+          - not_null
+
+      - name: window_end_date
+        description: Latest weather date included in the current rolling window.
+        data_tests:
+          - not_null
+
+      - name: days_observed
+        description: Number of distinct weather dates available in the rolling window.
+        data_tests:
+          - not_null
+
+      - name: temperature_trend_c_per_day
+        description: >
+          Linear temperature trend measured as the slope of maximum daily
+          temperature over time in degrees Celsius per day.
+
+      - name: avg_day_to_day_temp_change_c
+        description: >
+          Average absolute change in maximum daily temperature between
+          consecutive observed days.
+
+      - name: total_precipitation_mm
+        description: Total precipitation across the rolling window in millimetres.
+        data_tests:
+          - not_null
+
+      - name: longest_rain_streak_days
+        description: >
+          Longest consecutive run of calendar days in the window where rain_sum
+          was greater than zero.
+        data_tests:
+          - not_null
+
+      - name: sunshine_percentage
+        description: >
+          Percentage of total daylight duration in the window that was recorded
+          as sunshine.
+        data_tests:
+          - not_null
