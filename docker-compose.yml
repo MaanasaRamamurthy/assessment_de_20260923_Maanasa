@@ -6,7 +6,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-de}
       POSTGRES_DB: ${POSTGRES_DB:-warehouse}
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./sql/init:/docker-entrypoint-initdb.d:ro
@@ -28,6 +28,7 @@ services:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER:-de}:${POSTGRES_PASSWORD:-de}@postgres:5432/airflow
       AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
+      _AIRFLOW_WWW_USER_CREATE: "true"
       _AIRFLOW_WWW_USER_USERNAME: admin
       _AIRFLOW_WWW_USER_PASSWORD: admin
       WAREHOUSE_HOST: postgres
@@ -36,6 +37,8 @@ services:
       WAREHOUSE_USER: ${POSTGRES_USER:-de}
       WAREHOUSE_PASSWORD: ${POSTGRES_PASSWORD:-de}
       DBT_PROFILES_DIR: /opt/airflow/dbt
+      DBT_LOG_PATH: /tmp/dbt-logs
+      DBT_TARGET_PATH: /tmp/dbt-target
     volumes: &pipeline_volumes
       - ./dags:/opt/airflow/dags
       - ./ingestion:/opt/airflow/ingestion
