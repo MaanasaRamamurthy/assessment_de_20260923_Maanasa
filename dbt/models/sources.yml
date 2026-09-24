@@ -8,4 +8,24 @@ version: 2
 #     tables:
 #       - name: weather_daily
 #         description: One row per city per date as returned by Open-Meteo.
-sources: []
+sources: 
+  - name: raw
+    schema: raw
+    description: Raw data loaded from the Open-Meteo archive API.
+
+    tables:
+      - name: weather_daily
+        description: One row per configured city and logical date.
+
+        columns:
+          - name: city
+            description: Configured city name.
+
+          - name: logical_date
+            description: Logical date represented by the ingestion run.
+
+          - name: payload
+            description: Raw Open-Meteo API response stored as JSONB.
+
+          - name: loaded_at
+            description: Timestamp when the raw row was inserted or refreshed.
