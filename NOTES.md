@@ -45,13 +45,8 @@ I used **ChatGPT only** as a development assistant for clarifying framework beha
 | Where (file / area) | What the tool did | What I changed afterwards |
 | --- | --- | --- |
 | Docker / Jupyter permissions | Helped diagnose why `walkthrough.ipynb` was read-only inside the container by comparing the host file ownership with the Jupyter container user. | I updated the Jupyter service configuration, rebuilt the container, and verified that notebook outputs could be saved correctly. |
-
 | dbt schema configuration | Helped identify why dbt was creating target-prefixed schemas instead of the required `staging` and `marts` schemas, and explained the role of `generate_schema_name`. | I added the project macro, reran dbt, and verified that the models were created in the intended schemas. |
-
 | Repository structure / maintainability | Reviewed the repository layout and discussed where ingestion code, dbt models, tests, DAGs, SQL initialization files, and notebook logic should live for clarity. | I kept the supplied scaffold and organized new files within the existing structure so responsibilities remained separated and easy to follow. |
-
 | Airflow / Docker debugging | Helped interpret runtime behaviour and suggested ways to inspect the containers when `make reproduce` appeared idle, such as checking Docker processes and Airflow activity. | I used those diagnostics to confirm the notebook was actively executing the Airflow backfill and dbt tasks rather than being stuck. |
-
 | `notebooks/walkthrough.ipynb` | Reviewed what evidence would be useful after each pipeline stage, such as raw rows, staging output, backfill coverage, idempotency, and final mart results. | I selected the queries and outputs, ran the notebook end to end, and saved the final execution evidence. |
-
 | Documentation | Helped draft and review explanatory text for the walkthrough and project notes. | I reviewed and edited the wording so it matched the final implementation, observed behaviour, and trade-offs in the submitted solution. |
