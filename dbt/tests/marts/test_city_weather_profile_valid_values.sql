@@ -1,6 +1,6 @@
 select *
 
-from {{ ref('city_weather_30d_profile') }}
+from {{ ref('city_weather_profile') }}
 
 where
     days_observed < 1
